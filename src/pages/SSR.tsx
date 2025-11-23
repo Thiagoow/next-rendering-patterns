@@ -1,26 +1,29 @@
+import { GetServerSideProps } from "next";
 import { User } from "@/types/user";
 
-export default async function SSRExample() {
-  const time = new Date().toLocaleTimeString();
+interface Props {
+  users: User[];
+  time: string;
+}
 
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const users: User[] = await fetch(
     "https://jsonplaceholder.typicode.com/users",
-    {
-      cache: "no-store",
-      /* or:
-      next: {
-        revalidate: 60,
-      }, */
-    },
   ).then((res) => res.json());
 
+  return {
+    props: {
+      users,
+      time: new Date().toLocaleTimeString(),
+    },
+  };
+};
+
+export default function SSRExample({ users, time }: Props) {
   return (
     <main className="p-4 space-y-6">
       <h1 className="text-2xl font-bold">Server-Side Rendering</h1>
-      <p>
-        fetch with cache: &apos;no-store&apos; or next revalidate - Server time:{" "}
-        {time}
-      </p>
+      <p>Using getServerSideProps - Server time: {time}</p>
 
       <ul>
         {users.map((user) => (

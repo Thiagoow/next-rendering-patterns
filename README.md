@@ -1,9 +1,9 @@
-# Next.js 16 Web Rendering Patterns
+# Next.js 13 Legacy Rendering Implementations
 
-- **Client-Side Rendering:** fully rendered on the user's browser through JavaScript.
-- **Static Site Generation:** works by default, fetch and return static files populated at build time.
-- **Server-Side Rendering:** when disabling cache or using next revalidate on fetch options.
-- **Incremental Static Regeneration:** when exporting const revalidate with how many seconds it takes.
+- **Client-Side Rendering:** fully rendered on the user's browser if fetching with `useEffect`.
+- **Static Site Generation:** the default, pre-generating at build time with `getStaticProps` to fetch. Uses `getStaticPaths` for dynamic routes.
+- **Server-Side Rendering:** when fetching data on the server. Uses `getServerSideProps`.
+- **Incremental Static Regeneration:** renders static pages with `getStaticProps` and `revalidate` to update on a schedule after build time.
 
 ### Demo: https://thiagoow-web-rendering-patterns.vercel.app
 

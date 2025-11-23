@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 
 export default function CSRExample() {
@@ -8,7 +6,7 @@ export default function CSRExample() {
   return (
     <main className="p-4 space-y-6">
       <h1 className="text-2xl font-bold">Client-Side Rendering</h1>
-      <p>Add &apos;use-client&apos; on the top of the file</p>
+      <p>No changes: using React hooks will make it CSR by default.</p>
 
       <button
         onClick={() => setCount(count + 1)}

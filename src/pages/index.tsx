@@ -1,18 +1,28 @@
 import Link from "next/link";
-import type { Route } from "next";
 
-const pageLinks: { href: Route; label: string }[] = [
+const pageLinks = [
   { href: "/CSR", label: "CSR: Client-Side Rendering" },
-  { href: "/posts/1" as Route, label: "SSG: Static Site Generation" },
+  { href: "/posts/1", label: "Dynamic SSG: Static Site Generation" },
   { href: "/SSR", label: "SSR: Server-Side Rendering" },
   { href: "/ISR", label: "ISR: Incremental Static Regeneration" },
 ];
 
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
+
 export default function Home() {
   return (
     <main className="flex flex-col p-4 space-y-6">
-      <h1 className="text-2xl font-bold">Next.js 16 Rendering Patterns</h1>
-      <p>This page is already SSG by default!</p>
+      <h1 className="text-2xl font-bold">
+        Next.js Pages Router Rendering Patterns
+      </h1>
+      <p>
+        Since there&apos;s no fetch or React hooks, this page is also SSG by
+        default!
+      </p>
 
       {pageLinks.map(({ href, label }) => (
         <Link

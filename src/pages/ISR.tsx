@@ -1,16 +1,28 @@
+import { GetStaticProps } from "next";
 import { Post } from "@/types/post";
 
-export const revalidate = 60;
+interface Props {
+  posts: Post[];
+}
 
-export default async function ISRExample() {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts: Post[] = await fetch(
     "https://jsonplaceholder.typicode.com/posts?_limit=5",
   ).then((res) => res.json());
 
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 60,
+  };
+};
+
+export default function ISRExample({ posts }: Props) {
   return (
     <main className="p-4 space-y-6">
       <h1 className="text-2xl font-bold">Incremental Static Regeneration</h1>
-      <p>export const revalidate with how many seconds it takes</p>
+      <p>Using getStaticProps with revalidate option</p>
 
       <div className="space-y-4">
         {posts.map((post) => (
